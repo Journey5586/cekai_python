@@ -41,4 +41,6 @@ class TestCalc:
         assert result == res_tmp
 
 if __name__ == '__main__':
+    # pytest.main()
     pytest.main()
+
