@@ -41,6 +41,7 @@ class TestCalc:
         assert result == res_tmp
 
 if __name__ == '__main__':
+    # 为啥经常push失败呢
     # pytest.main()
     pytest.main()
 
