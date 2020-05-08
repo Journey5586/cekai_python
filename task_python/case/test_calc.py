@@ -25,18 +25,18 @@ class TestCalc:
     '''
     def setup_class(self):
         self.calc = Calc()
-        print('../data/calc_add.yaml')
+        # print('../data/calc_add.yaml')
 
     @pytest.mark.parametrize('a,b,result',yaml.safe_load(open('../data/calc_add.yaml')))
     def test_add(self,a,b,result):
-        print(a,b,result)
-        print(type(result))
+        # print(a,b,result)
+        # print(type(result))
         res_tmp = self.calc.add(a,b)
         assert result == res_tmp
 
     @pytest.mark.parametrize('a,b,result',yaml.safe_load(open('../data/calc_div.yaml')))
     def test_div(self,a,b,result):
-        print(a,b,result)
+        # print(a,b,result)
         res_tmp = self.calc.div(a,b)
         assert result == res_tmp
 
