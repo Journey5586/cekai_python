@@ -42,15 +42,15 @@ class Calc:
         :return: 整数或浮点数
         '''
         try:
-            return a / b
+            return a/b
 
         except Exception:
-            print('出现了异常，数字不能与非数字相加，具体错误信息如下：\n\n', traceback.format_exc())
+            print('出现了异常，数字不能与非数字相除，具体错误信息如下：\n\n', traceback.format_exc())
             return None
 
 
-calc = Calc()
-try:
-    print(calc.add(1, '1'))
-except Exception:
-    print('afsafa:', traceback.format_exc())
+# calc = Calc()
+# try:
+#     print(calc.add(1, '1'))
+# except Exception:
+#     print('afsafa:', traceback.format_exc())

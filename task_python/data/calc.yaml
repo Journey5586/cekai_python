@@ -1,0 +1,39 @@
+add:
+  -
+    a: 1
+    b: 2
+    result: 3
+  -
+    a: 2.2
+    b: 3.2
+    result: 5.4
+  -
+    a: -1
+    b: 1
+    result: 0
+  -
+    a: 1
+    b: 'aaa'
+    result: null
+---
+div:
+  -
+    a: 1
+    b: 2
+    result: 0.5
+  -
+    a: 10.0
+    b: 5
+    result: 2.0
+  -
+    a: 10
+    b: 0
+    result: ~
+  -
+    a: -10
+    b: 5
+    result: 02
+  -
+    a: 'aa'
+    b: 1
+    result: null
