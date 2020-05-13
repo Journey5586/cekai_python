@@ -67,7 +67,7 @@ class TestCalc:
 
     @allure.story('加法运算')
     @pytest.mark.parametrize('a,b,result', yaml.safe_load(open('../data/calc_add.yaml')))
-    def test_add(self, init_calc, a, b, result):
+    def calc_add(self, init_calc, a, b, result):
         # print(a,b,result)
         # print(type(result))
         self.calc = init_calc
@@ -75,7 +75,7 @@ class TestCalc:
         assert result == res_tmp
 
     @pytest.mark.parametrize('a,b,result', yaml.safe_load(open('../data/calc_div.yaml')))
-    def test_div(self, init_calc, a, b, result):
+    def calc_div(self, init_calc, a, b, result):
         # print(a,b,result)
         self.calc = init_calc
         res_tmp = self.calc.div(a, b)
@@ -83,7 +83,7 @@ class TestCalc:
 
     @allure.story('加法运算2')
     @pytest.mark.parametrize('add_dict_tmp', get_data(add_key))
-    def test_add_01(self, init_calc, add_dict_tmp):
+    def calc_add_01(self, init_calc, add_dict_tmp):
         '''
         此时的dict为一个字典。   \n
         :param dict_tmp: 数据源字典
@@ -100,7 +100,7 @@ class TestCalc:
 
     @allure.story('除法运算2')
     @pytest.mark.parametrize('div_dict_tmp', get_data(div_key))
-    def test_div_01(self, init_calc, div_dict_tmp):
+    def calc_div_01(self, init_calc, div_dict_tmp):
         print(div_key, '============', div_dict_tmp)
         dict_tmp = div_dict_tmp
         a = dict_tmp.get('a')
@@ -113,7 +113,7 @@ class TestCalc:
 
     @allure.story('乘法运算')
     @pytest.mark.parametrize('dict_tmp', get_data(mul_key))
-    def test_mul(self, init_calc, dict_tmp):
+    def calc_mul(self, init_calc, dict_tmp):
         a = dict_tmp.get('a')
         b = dict_tmp.get('b')
         result = dict_tmp.get('result')
@@ -124,7 +124,7 @@ class TestCalc:
 
     @allure.story('减法运算')
     @pytest.mark.parametrize('dict_tmp', get_data(sub_key))
-    def test_sub(self, init_calc, dict_tmp):
+    def calc_sub(self, init_calc, dict_tmp):
         a = dict_tmp.get('a')
         b = dict_tmp.get('b')
         result = dict_tmp.get('result')
@@ -138,4 +138,4 @@ if __name__ == '__main__':
     # 为啥经常push失败呢
     # pytest.main()
 
-    pytest.main(['-vs', 'test_calc.py'])
+    pytest.main(['-vs', 'test_calc1.py'])

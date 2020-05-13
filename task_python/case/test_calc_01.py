@@ -19,7 +19,7 @@ import sys
 import yaml
 
 sys.path.append('../task')
-from task_python.task.calc import Calc
+# from task_python.task.calc import Calc
 
 add_key = 'add'
 div_key = 'div'
@@ -45,6 +45,12 @@ def get_data(key):
     return value
 
 
+def get_steps(step_yaml_path):
+    data_path = step_yaml_path
+    data = yaml.safe_load(open(data_path))
+    return data
+
+
 # @pytest.fixture()
 # def init_calc():
 #     calc = Calc()
@@ -67,15 +73,16 @@ class TestCalc:
 
     @allure.story('加法运算')
     @pytest.mark.parametrize('a,b,result', yaml.safe_load(open('../data/calc_add.yaml')))
-    def test_add(self, init_calc, a, b, result):
+    def calc_add(self, init_calc, a, b, result):
         # print(a,b,result)
         # print(type(result))
         self.calc = init_calc
         res_tmp = self.calc.add(a, b)
         assert result == res_tmp
 
+    @allure.story('除法运算')
     @pytest.mark.parametrize('a,b,result', yaml.safe_load(open('../data/calc_div.yaml')))
-    def test_div(self, init_calc, a, b, result):
+    def calc_div(self, init_calc, a, b, result):
         # print(a,b,result)
         self.calc = init_calc
         res_tmp = self.calc.div(a, b)
@@ -83,7 +90,7 @@ class TestCalc:
 
     @allure.story('加法运算2')
     @pytest.mark.parametrize('add_dict_tmp', get_data(add_key))
-    def test_add_01(self, init_calc, add_dict_tmp):
+    def calc_add_01(self, init_calc, add_dict_tmp):
         '''
         此时的dict为一个字典。   \n
         :param dict_tmp: 数据源字典
@@ -95,12 +102,12 @@ class TestCalc:
         result = dict_tmp.get('result')
         self.calc = init_calc
         res_tmp = self.calc.add(a, b)
-        print(a,b,result,res_tmp)
+        print(a, b, result, res_tmp)
         assert result == res_tmp
 
     @allure.story('除法运算2')
     @pytest.mark.parametrize('div_dict_tmp', get_data(div_key))
-    def test_div_01(self, init_calc, div_dict_tmp):
+    def calc_div_01(self, init_calc, div_dict_tmp):
         print(div_key, '============', div_dict_tmp)
         dict_tmp = div_dict_tmp
         a = dict_tmp.get('a')
@@ -113,7 +120,7 @@ class TestCalc:
 
     @allure.story('乘法运算')
     @pytest.mark.parametrize('dict_tmp', get_data(mul_key))
-    def test_mul(self, init_calc, dict_tmp):
+    def calc_mul(self, init_calc, dict_tmp):
         a = dict_tmp.get('a')
         b = dict_tmp.get('b')
         result = dict_tmp.get('result')
@@ -124,7 +131,7 @@ class TestCalc:
 
     @allure.story('减法运算')
     @pytest.mark.parametrize('dict_tmp', get_data(sub_key))
-    def test_sub(self, init_calc, dict_tmp):
+    def calc_sub(self, init_calc, dict_tmp):
         a = dict_tmp.get('a')
         b = dict_tmp.get('b')
         result = dict_tmp.get('result')
@@ -133,9 +140,43 @@ class TestCalc:
 
         assert result == res_tmp
 
+    @allure.story('加法运算3--读取配置')
+    @pytest.mark.parametrize('dict_tmp', get_data(add_key))
+    def calc_add_by_step(self, init_calc, dict_tmp):
+        self.calc = init_calc
+        steps = get_steps('../data/calc_steps.yaml')
+        a = dict_tmp.get('a')
+        b = dict_tmp.get('b')
+        result = dict_tmp.get('result')
+
+        for step in steps:
+            if step == 'add':
+                res_tmp = self.calc.add(a, b)
+            elif step == 'add1':
+                res_tmp = self.calc.add1(a, b)
+
+        assert result == res_tmp
+
+    @allure.story('除法运算3---读取配置')
+    @pytest.mark.parametrize('dict_tmp', get_data(div_key))
+    def calc_div_by_step(self, init_calc, dict_tmp):
+        self.calc = init_calc
+        steps = get_steps('../data/calc_steps.yaml')
+        a = dict_tmp.get('a')
+        b = dict_tmp.get('b')
+        result = dict_tmp.get('result')
+
+        for step in steps:
+            if step == 'div':
+                res_tmp = self.calc.div(a, b)
+            elif step == 'div1':
+                res_tmp = self.calc.div1(a, b)
+
+        assert result == res_tmp
+
 
 if __name__ == '__main__':
-    # 为啥经常push失败呢
+
     # pytest.main()
 
-    pytest.main(['-vs', 'test_calc.py'])
+    pytest.main(['-vs', 'test_calc1.py'])
