@@ -22,6 +22,7 @@ from task_python.task.calc import Calc
 
 @pytest.fixture()
 def init_calc():
+    # 实例化 计算器对象
     calc = Calc()
     return calc
 
@@ -29,6 +30,7 @@ def init_calc():
 def pytest_collection_modifyitems(session, config, items:list):
     for item in items:
         case_name = item.name
+        # 根据条件自动添加标签
         if 'add' in case_name:
             item.add_marker(pytest.mark.add)
         elif "sub" in case_name:

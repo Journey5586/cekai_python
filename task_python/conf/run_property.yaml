@@ -1,0 +1,7 @@
+Driver:
+  brower: chrome
+  chrome_driver_name: chromedriver--76.exe
+  firefox_driver_name: geckodriver--65.exe
+  wait_timeout: 20
+  implicitly_timeout: 10
+  url: http://www.baidu.com
